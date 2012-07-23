@@ -8,7 +8,7 @@ digestarchive - display entry hexdigest in archive
 
 =head1 VERSION
 
-0.03
+0.031
 
 =head1 SYNOPSIS
 
@@ -48,7 +48,7 @@ use Getopt::Long;
 use FindBin qw($Script);
 use Pod::Usage;
 
-our $VERSION = '0.03';
+our $VERSION = '0.031';
 our %ARCHIVE_ENTRY_TYPES = ( 
 					0 => "FILE",
 					1 => "HARDLINK",
