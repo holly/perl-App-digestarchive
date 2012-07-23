@@ -1,4 +1,8 @@
 Revision history for Perl extension App::digestarchive
 
+0.03    Mon Jul 23 16:14:45 JST 2012
+        - update typo
+0.02    Mon Jul 23 16:14:28 JST 2012
+        - add filter_cb test
 0.01    Mon Jul 23 01:25:06 JST 2012
         - original version
