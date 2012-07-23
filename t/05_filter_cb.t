@@ -8,11 +8,14 @@ our $tar_archive = File::Spec->catfile($Bin, "test-archive.tar");
 
 my $app = App::digestarchive->new;
 $app->read($tar_archive);
-my $f = $app->next;
+my $all = $app->all(sub {
+						my $f = shift;
+						return $f->type == 0 || $f->type == 1 ? 1 : 0 
+					});
 
-isa_ok $f, "Archive::Tar::File", "\$f is Archive::Tar::File package" ;
-foreach my $method (@App::digestarchive::ADD_ENTRY_METHODS) {
-	ok eval { $f->can($method) } , "Archive::Tar::File $method method";
+foreach my $f (@{$all}) {
+
+	ok $f->type == 0 || $f->type == 1, "filter_cb ok";
 }
 
 done_testing;

@@ -12,9 +12,10 @@ use Class::Accessor "antlers";
 has digest_type  => (is => "rw", type => "Str");
 has archiver     => (is => "rw", type => "Str");
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our $DIGEST_TYPE  = "MD5";
 our $NONE_DIGEST_MESSAGE = "** can not get digest **";
+our @ADD_ENTRY_METHODS   = qw(digest link_or_real_name);
 
 sub new {
 
@@ -47,10 +48,17 @@ sub read {
 
 sub all {
 
-	my $self = shift;
+	my($self, $filter_cb) = @_;
 	my @all;
 	while (my $f = $self->next) {
-		push @all, $f;
+
+		if (defined $filter_cb && ref($filter_cb) && "CODE") {
+			if ($filter_cb->($f)) {
+				push @all, $f;
+			}
+		} else {
+			push @all, $f;
+		}
 	} 
 	return \@all;
 }
@@ -63,24 +71,24 @@ sub next {
 
 	{
 		no strict "refs"; ## no critic
+		no warnings "redefine";
 		my $pkg = ref $f;
-		*{"$pkg\::digest"} = sub {
-								my $self = shift;
-								if (scalar(@_) > 0) {
-									$self->{digest} = $_[0];
-								}
-								return $self->{digest};
-							};
-		*{"$pkg\::link_or_real_name"} = sub {
-								my $self = shift;
-								if (scalar(@_) > 0) {
-									$self->{link_or_real_name} = $_[0];
-								}
-								return $self->{link_or_real_name};
-							};
+		foreach my $method (@ADD_ENTRY_METHODS) {
+			*{"$pkg\::$method"} = sub {
+									my $self = shift;
+									if (scalar(@_) > 0) {
+										$self->{$method} = $_[0];
+									}
+									return $self->{$method};
+								};
+		}
 	}
+
+	# set digest
 	$f->digest(($f->type == Archive::Tar::FILE or $f->type == Archive::Tar::HARDLINK) ? $self->digest($f->data) : $NONE_DIGEST_MESSAGE);
+	# set link_or_real_name
 	$f->link_or_real_name(($f->type == Archive::Tar::SYMLINK) ? sprintf "%s -> %s", $f->name, $f->linkname : $f->name);
+
 	return $f;
 }
 
@@ -139,7 +147,7 @@ App::digestarchive - package for digestarchive command
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 
