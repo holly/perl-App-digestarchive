@@ -1,5 +1,7 @@
 Revision history for Perl extension App::digestarchive
 
+0.041   Tue Jul 24 22:24:16 JST 2012
+        - update Makefile.PL. none use Module::Install::TestTarget
 0.04    Tue Jul 24 21:48:47 JST 2012
         - update Makefile.PL and test
 0.032   Tue Jul 24 13:43:12 JST 2012

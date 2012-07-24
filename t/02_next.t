@@ -13,5 +13,4 @@ isa_ok $f, "Archive::Tar::File", "\$f is Archive::Tar::File package" ;
 foreach my $method (@App::digestarchive::ADD_ENTRY_METHODS) {
 	ok eval { $f->can($method) } , "Archive::Tar::File $method method";
 }
-
 done_testing;
