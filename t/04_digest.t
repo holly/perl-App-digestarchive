@@ -1,10 +1,9 @@
 use strict;
 use Test::More tests => 1;
 use App::digestarchive;
-use FindBin qw($Bin);
 use File::Spec;
 
-our $tar_archive = File::Spec->catfile($Bin, "test-archive.tar");
+my $tar_archive = File::Spec->catfile(File::Spec->tmpdir, "test-archive.tar");
 
 my $app = App::digestarchive->new;
 $app->digest_type("SHA1");

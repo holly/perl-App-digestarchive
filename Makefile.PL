@@ -14,6 +14,12 @@ requires
 	'Digest::SHA1'            => 0,
 ;
 
+# for Module::Install::TestTarget
+default_test_target
+	load_modules     => [qw(File::Spec File::Find File::Basename Archive::Tar Cwd)],
+	run_on_prepare   => [qw(t/scripts/prepare.pl)],
+	run_on_finalize  => [qw(t/scripts/finalize.pl)],
+
 tests 't/*.t';
 author_tests 'xt';
 

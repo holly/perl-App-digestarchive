@@ -1,14 +1,13 @@
 use strict;
 use Test::More tests => 9;
 use App::digestarchive;
-use FindBin qw($Bin);
 use File::Spec;
 
-our $tar_archive = File::Spec->catfile($Bin, "test-archive.tar");
-our $gzip_archive = $tar_archive . ".gz";
-our $bzip2_archive = $tar_archive . ".bz2";
-
 my $app = App::digestarchive->new;
+
+my $tar_archive   = File::Spec->catfile(File::Spec->tmpdir, "test-archive.tar");
+my $gzip_archive  = $tar_archive . ".gz";
+my $bzip2_archive = $tar_archive . ".bz2";
 
 ok $app->read($tar_archive), "read tar archive file";
 ok $app->read($gzip_archive), "read gzip archive file";
