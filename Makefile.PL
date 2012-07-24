@@ -6,7 +6,7 @@ install_script "bin/digestarchive";
 
 requires
 	'Class::Accessor'         => '0.34',
-	'Archive::Tar'            => 0,
+	'Archive::Tar'            => '1.78',
 	'Compress::Zlib'          => 0,
 	'IO::Uncompress::Bunzip2' => 0,
 	'Digest'                  => 0,
