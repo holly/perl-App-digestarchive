@@ -1,6 +1,7 @@
 package App::digestarchive;
 
 use strict;
+use v5.8.0;
 use warnings;
 use Archive::Tar;
 use Compress::Zlib;
@@ -12,7 +13,7 @@ use Class::Accessor "antlers";
 has digest_type  => (is => "rw", type => "Str");
 has archiver     => (is => "rw", type => "Str");
 
-our $VERSION = '0.042';
+our $VERSION = '0.043';
 our $DIGEST_TYPE  = "MD5";
 our $NONE_DIGEST_MESSAGE = "** can not get digest **";
 our @ADD_ENTRY_METHODS   = qw(digest link_or_real_name);
@@ -147,7 +148,7 @@ App::digestarchive - package for digestarchive command
 
 =head1 VERSION
 
-0.042
+0.043
 
 =head1 SYNOPSIS
 

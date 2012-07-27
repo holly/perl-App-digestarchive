@@ -1,5 +1,7 @@
 Revision history for Perl extension App::digestarchive
 
+0.043   Fri Jul 27 19:11:39 JST 2012
+        - add use v5.8.0
 0.042   Tue Jul 24 22:32:34 JST 2012
         - delete trash
 0.041   Tue Jul 24 22:24:16 JST 2012
