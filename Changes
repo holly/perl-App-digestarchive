@@ -1,7 +1,7 @@
 Revision history for Perl extension App::digestarchive
 
 0.044   Tue Nov  6 01:46:31 JST 2012
-        - update Module::Install v1.0.6
+        - update inc/Module/Install.pm v1.0.6
 0.043   Fri Jul 27 19:11:39 JST 2012
         - add use v5.8.0
 0.042   Tue Jul 24 22:32:34 JST 2012
